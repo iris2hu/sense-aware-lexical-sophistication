@@ -6,18 +6,19 @@ This project releases the automatic analysis tool and the resources in the paper
 
 ## Prerequisites
 
-1. Install Python and packages
-*   **Python3**
+1. Install Python packages
+*   **`Python 3.5+`**
 *   **[`NLTK`](http://www.nltk.org/install.html)**
-    12-layer, 768-hidden, 12-heads, 110M parameters
 *   **[`bert_serving`](https://pypi.org/project/bert-serving-server/)**
+
 
 2. Download the pre-trained language model
 In this study, we used the [`uncased BERT-Base`](https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip) model to generate deep contextualized word embeddings. More options can be found at https://github.com/google-research/bert.
+Since BERT is a deep learning model, it is suggested to use the tool on a **GPU-based** device.
 
 3. Download the sense embeddings
-The sense embeddings constructed in this study (about 107M) can be download at [Google Drive] or [BNU cloud storage](https://pan.bnu.edu.cn/l/yo7MZF).
-Please place the file in the `dict` folder before running the codes.
+The sense embeddings constructed in this study (about 107M) can be download at [Google Drive](https://drive.google.com/file/d/1CSFrDXfJ0111wBy2zdL5NIEsl28tiYYL/view?usp=sharing) or [BNU Cloud Storage](https://pan.bnu.edu.cn/l/yo7MZF).
+Please place the file in the **`dict`** folder before running the codes.
 
 ## Automatic analysis 
 
@@ -30,7 +31,7 @@ bert-serving-start \
     -device_map 0 \           # please specify the GPU device you plan to use
     -model_dir bert_base \    # please specify the directory of the pre-trained BERT model
     -show_tokens_to_client \
-    -priority_batch_size 32   # batch_size is set based on GPU memory, in our study we use the Nvidia 1080ti with 11G memory
+    -priority_batch_size 32   # batch_size is set based on GPU memory, in this study the Nvidia 1080TI (11G memory) is used.
 ```
 
 Step 2. Tag the senses for polysemous words
