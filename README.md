@@ -1,8 +1,8 @@
 # Sense-aware Lexical Sophistication
 
-This project releases the automatic analysis tool and the resources in the paper:
+This project releases the automatic analysis tool and the resources in the article:
 
-<em>Xiaofei Lu and Renfen Hu. Sense-aware lexical sophistication indices and their relationship to second language writing quality. under review.</em>
+<em>Xiaofei Lu and Renfen Hu (2021). Sense-aware lexical sophistication indices and their relationship to second language writing quality. under review.</em>
 
 ## Prerequisites
 
