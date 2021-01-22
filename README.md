@@ -6,20 +6,20 @@ This project releases the automatic analysis tool and the resources in the paper
 
 ## Prerequisites
 
-**Install Python packages**
+**1. Install Python packages**
 
 *   **`Python 3.5+`**
 *   **[`NLTK`](http://www.nltk.org/install.html)**
 *   **[`bert_serving`](https://pypi.org/project/bert-serving-server/)**
 
 
-**Download the pre-trained language model**
+**2. Download the pre-trained language model**
 
 In this study, we used the [`uncased BERT-Base`](https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip) model to generate deep contextualized word embeddings. More options can be found at https://github.com/google-research/bert.
 
 Since BERT is a deep learning model, it is suggested to use the tool on a **GPU-based** device.
 
-**Download the sense embeddings**
+**3. Download the sense embeddings**
 
 The sense embeddings constructed in this study (about 107M) can be download at [Google Drive](https://drive.google.com/file/d/1CSFrDXfJ0111wBy2zdL5NIEsl28tiYYL/view?usp=sharing) or [BNU Cloud Storage](https://pan.bnu.edu.cn/l/yo7MZF).
 
