@@ -34,7 +34,7 @@ bert-serving-start \
     -pooling_strategy NONE \
     -max_seq_len 128 \
     -pooling_layer -1 \
-    -device_map 0 \           # please specify the GPU device you plan to use
+    -device_map 0 \           # please specify the GPU device ID
     -model_dir bert_base \    # please specify the directory of the pre-trained BERT model
     -show_tokens_to_client \
     -priority_batch_size 32   # batch_size is set based on GPU memory, in this study the Nvidia 1080TI (11G memory) is used.
