@@ -6,20 +6,20 @@ This project releases the automatic analysis tool and the resources in the paper
 
 ## Prerequisites
 
-1. Install Python packages
+**Install Python packages**
 
 *   **`Python 3.5+`**
 *   **[`NLTK`](http://www.nltk.org/install.html)**
 *   **[`bert_serving`](https://pypi.org/project/bert-serving-server/)**
 
 
-2. Download the pre-trained language model
+**Download the pre-trained language model**
 
 In this study, we used the [`uncased BERT-Base`](https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip) model to generate deep contextualized word embeddings. More options can be found at https://github.com/google-research/bert.
 
 Since BERT is a deep learning model, it is suggested to use the tool on a **GPU-based** device.
 
-3. Download the sense embeddings
+**Download the sense embeddings**
 
 The sense embeddings constructed in this study (about 107M) can be download at [Google Drive](https://drive.google.com/file/d/1CSFrDXfJ0111wBy2zdL5NIEsl28tiYYL/view?usp=sharing) or [BNU Cloud Storage](https://pan.bnu.edu.cn/l/yo7MZF).
 
@@ -27,7 +27,7 @@ Please place the file in the **`dict`** folder before running the codes.
 
 ## Automatic analysis 
 
-Step 1. Start the BERT service.
+**Step 1. Start the BERT service.**
 
 ```python
 bert-serving-start \
@@ -40,7 +40,7 @@ bert-serving-start \
     -priority_batch_size 32   # batch_size is set based on GPU memory, in this study the Nvidia 1080TI (11G memory) is used.
 ```
 
-Step 2. Tag the senses for polysemous words.
+**Step 2. Tag the senses for polysemous words.**
 
 ```python
 python tag_text_server.py
@@ -49,13 +49,13 @@ In this step, we firstly conduct sentence tokenization for each essay, which can
 
 The sense tagging results can be seen in the folder of **`output`**.
 
-Step 3. Terminate the bert service.
+**Step 3. Terminate the bert service.**
 
 ```python
 bert-serving-terminate -port 5555
 ```
 
-Step 4. Compute the sense-aware lexical sophistication indices.
+**Step 4. Compute the sense-aware lexical sophistication indices.**
 
 ```python
 python sense_aware_indices.py
