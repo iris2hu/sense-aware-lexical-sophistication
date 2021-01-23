@@ -1,4 +1,4 @@
-import glob, math, os
+import glob, math, os, csv
 import numpy as np
 import pickle as p
 
@@ -9,8 +9,7 @@ with open('./dict/word_freq.data', 'rb') as f:
 with open('./dict/sense_freq.data', 'rb') as f:
     sense_freq = p.load(f)
 
-
-def get_lexical_sophistication_indices(wordlist, freq_threshold=3000):
+def get_lexical_sophistication_indices(file, freq_threshold=3000):
     
     '''
     Version1. return the six sense-aware lexical sophistication indices
@@ -22,10 +21,15 @@ def get_lexical_sophistication_indices(wordlist, freq_threshold=3000):
     - Mean_Freq_Sense
     '''
 
+    wordlist = []
+    for line in open(file):
+        wl = line.strip().split(' ')
+        if wl:
+            wordlist.extend(wl)
+
     wordlist = [w.lower() for w in wordlist if w.split('_')[0].isalpha()]
     sophis_words, sa_sophis_words = [], []
     freq1, freq2 = [], []
-    words_processed, sense_processed = [], []
     
     # consider only the sophistication words
     for w in wordlist:
@@ -47,18 +51,13 @@ def get_lexical_sophistication_indices(wordlist, freq_threshold=3000):
         if freq:
             freq2.append(freq)
 
-    # Ratio_Sophis_Token
-    p1 = len(sophis_words) / math.sqrt(len(wordlist))
-    # Ratio_SA_Sophis_Token
-    p2 = len(sa_sophis_words) / math.sqrt(len(wordlist))
-    # Ratio_Sophis_Type
-    p3 = len(set(sophis_words)) / math.sqrt(len(set(wordlist)))
-    # Ratio_SA_Sophis_Type
-    p4 = len(set(sa_sophis_words)) / math.sqrt(len(set(wordlist)))
-    # Mean_Freq_Word
-    l1 = np.mean([math.log(f1) for f1 in freq1])
-    # Mean_Freq_Sense
-    l2 = np.mean([math.log(f2) for f2 in freq2])
+    
+    p1 = len(sophis_words) / math.sqrt(len(wordlist))   # Ratio_Sophis_Token
+    p2 = len(sa_sophis_words) / math.sqrt(len(wordlist))    # Ratio_SA_Sophis_Token
+    p3 = len(set(sophis_words)) / math.sqrt(len(set(wordlist))) # Ratio_Sophis_Type
+    p4 = len(set(sa_sophis_words)) / math.sqrt(len(set(wordlist)))  # Ratio_SA_Sophis_Type
+    l1 = np.mean([math.log(f1) for f1 in freq1])    # Mean_Freq_Word
+    l2 = np.mean([math.log(f2) for f2 in freq2])    # Mean_Freq_Sense
 
     return p1, p2, p3, p4, l1, l2
 
@@ -71,19 +70,12 @@ if __name__ == '__main__':
 
     with open(out_file, 'w') as f:
 
-        column_names = ['filename', 'Ratio_Sophis_Token', 'Ratio_SA_Sophis_Token', 'Ratio_Sophis_Type', 'Ratio_SA_Sophis_Type', 'Mean_Freq_Word', 'Mean_Freq_Sense']
-        f.write(','.join(column_names) + '\n')
+        headers = ['filename', 'Ratio_Sophis_Token', 'Ratio_SA_Sophis_Token', 'Ratio_Sophis_Type', 'Ratio_SA_Sophis_Type', 'Mean_Freq_Word', 'Mean_Freq_Sense']
+        f_csv = csv.writer(f)
+        f_csv.writerow(headers)
 
         for file in files:
-            text_wl, text_swl = [], []
-            for line in open(file):
-                wl = line.strip().split(' ')
-                if wl:
-                    text_swl.extend(wl)
-            
             filename = os.path.split(file)[-1]
-            p1, p2, p3, p4, l1, l2 = get_lexical_sophistication_indices(text_swl)
-
-            info = [str(x) for x in [p1, p2, p3, p4, l1, l2]]
-            newline = filename + ',' + ','.join(info) + '\n'
-            f.write(newline)
+            p1, p2, p3, p4, l1, l2 = get_lexical_sophistication_indices(file)
+            row = [filename, p1, p2, p3, p4, l1, l2]
+            f_csv.writerow(row)
