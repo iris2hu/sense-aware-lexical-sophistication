@@ -49,7 +49,7 @@ In this step, we firstly conduct sentence tokenization for each essay, which can
 
 The sense tagging results can be seen in the folder of **`output`**.
 
-**Step 3. Terminate the bert service.**
+**Step 3. Terminate the BERT service.**
 
 ```python
 bert-serving-terminate -port 5555
