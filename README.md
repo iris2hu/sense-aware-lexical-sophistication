@@ -2,7 +2,7 @@
 
 This project releases the automatic analysis tool and the resources in the article:
 
-<em>Xiaofei Lu and Renfen Hu (2021). [Sense-aware lexical sophistication indices and their relationship to second language writing quality](https://rdcu.be/cuK1A). Behavior Research Methods. </em>
+Lu, X., & Hu, R. (2022). Sense-aware lexical sophistication indices and their relationship to second language writing quality. Behavior research methods, 54(3), 1444-1460. https://doi.org/10.3758/s13428-021-01675-6
 
 ## Prerequisites
 
